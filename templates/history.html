@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <caption>Transaction History</caption>
+        <thead>
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Order Type</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Price</th>
+                <th scope="col">Date & Time</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction["symbol"] }}</td>
+                    {% if transaction["shares"] < 0 %}
+                        <td>Sell</td>
+                    {% else %}
+                        <td>Buy</td>
+                    {% endif %}
+                    <td>{{ transaction["shares"] | abs }}</td>
+                    <td>{{ transaction["price"] | usd }}</td>
+                    <td>{{ transaction["date_time"] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

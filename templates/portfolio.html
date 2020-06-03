@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <caption>Cash</caption>
+        <thead>
+            <tr>
+                <th scope="col">Currency</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>USD</td>
+                <td>{{ cash | usd }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <caption>Stocks</caption>
+        <thead>
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for stock in stocks %}
+                <tr>
+                    <td>{{ stock["symbol"] }}</td>
+                    <td>{{ stock["share_count"] }}</td>
+                    <td>{{ quotes[stock["symbol"]]["price"] | usd }}</td>
+                    <td>{{ (stock["share_count"] * quotes[stock["symbol"]]["price"]) | usd }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3">Total Portfolio Value</td>
+                <td>{{ portfolio_value | usd }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}
