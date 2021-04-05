@@ -40,7 +40,7 @@ db = SQL("sqlite:///finance.db")
 if not os.environ.get("API_KEY"):
     # Manually set API key
     try:
-        os.environ["API_KEY"] = "pk_a31dd651bc3d41079b70850d2c7e1b2e"
+        os.environ["API_KEY"] = "insert_api_key_here"
     except:
         raise RuntimeError("API_KEY not set")
 
